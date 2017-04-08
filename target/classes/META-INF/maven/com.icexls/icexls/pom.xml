@@ -25,9 +25,9 @@
   </developers>
   
   <scm>
-      <connection>scm:git:https://github.com/iceroot/iceroot.git</connection>
-      <developerConnection>scm:git:https://github.com/iceroot/iceroot.git</developerConnection>
-      <url>https://github.com/iceroot/iceroot.git</url>
+      <connection>scm:git:https://github.com/icexls/icexls.git</connection>
+      <developerConnection>scm:git:https://github.com/icexls/icexls.git</developerConnection>
+      <url>https://github.com/icexls/icexls.git</url>
   </scm>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
