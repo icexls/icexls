@@ -9,7 +9,7 @@
 
   <name>icexls</name>
   <url>http://maven.apache.org</url>
-
+  <description>Excel import and export tool classes.</description>
   <licenses>
      <license>
        <name>The Apache License, Version 2.0</name>
