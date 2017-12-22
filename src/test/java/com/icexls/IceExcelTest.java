@@ -12,7 +12,6 @@ public class IceExcelTest {
     public void export() {
         String[][] data = { { "aaa", "167" }, { "278", "bbb2" }, { "aaa3", "120.36" }, { "aaa4", "bbb4" } };
         IceExcel iceExcel = new IceExcel("D:/xls-test.xls");
-        // IceExcel iceExcel=new
         // IceExcel("C:/Users/Administrator/Desktop/xls-test.xls","test-data");
         // IceExcelConfig.setSheet(iceExcel,"hello");
         IceExcelConfig.setNumberType(iceExcel, NumberType.STRING);
