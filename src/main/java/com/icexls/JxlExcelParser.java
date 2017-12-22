@@ -16,14 +16,18 @@ import jxl.write.biff.RowsExceededException;
 
 public class JxlExcelParser extends AbstractExcelParser implements ExcelParser {
 
-    // @Override
+    @Override
     public String[][] getData() {
         File file = new File(this.getExcelFileName());
         Workbook workbook = null;
         try {
             workbook = Workbook.getWorkbook(file);
         } catch (BiffException e) {
-            e.printStackTrace();
+        	if("Unable to recognize OLE stream".equals(e.getMessage())){
+        		throw new RuntimeException("jxl暂不支持Excel 2007,请使用POI实现");
+        	}else{
+        		e.printStackTrace();
+        	}
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,7 +82,6 @@ public class JxlExcelParser extends AbstractExcelParser implements ExcelParser {
                 } else {
                     throw new RuntimeException(e);
                 }
-                // e.printStackTrace();
             }
             WritableSheet createSheet = createWorkbook.createSheet(sheetName, 0);
             for (int i = 0; i < data.length; i++) {

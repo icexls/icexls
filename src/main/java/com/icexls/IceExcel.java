@@ -19,6 +19,7 @@ public class IceExcel {
      * 
      * @param excelFileName
      *            操作的Excel对应的文件路径
+     * @since 1.0
      */
     public IceExcel(String excelFileName) {
         this.excelFileName = excelFileName;
@@ -31,6 +32,7 @@ public class IceExcel {
      *            操作的Excel对应的文件路径
      * @param sheetName
      *            Excel对应的Sheet名称
+     * @since 1.0
      */
     public IceExcel(String excelFileName, String sheetName) {
         this.excelFileName = excelFileName;
@@ -49,6 +51,7 @@ public class IceExcel {
      * 读取Excel为String数组
      * 
      * @return 从Excel中读入的数据
+     * @since 1.0
      */
     public String[][] getData() {
         init(null);
@@ -60,6 +63,7 @@ public class IceExcel {
      * 
      * @param data
      *            需要导出Excel的数据
+     * @since 1.0
      */
     public void setData(String[][] data) {
         init("第一页");
@@ -72,12 +76,39 @@ public class IceExcel {
                 if (ExcelClassUtil.hasClass("jxl.Cell")) {
                     excelParser = new JxlExcelParser();
                 } else {
-                    excelParser = new PoiExcelParser();
+                    try {
+                        excelParser = new PoiExcelParser();
+                    } catch (NoClassDefFoundError e) {
+                        if ("org/apache/poi/ss/usermodel/Cell".equals(e.getMessage().trim())) {
+                            throw new RuntimeException(
+                                    "没有引入poi-x.x.x.jar,你可以从下面的地址下载:http://central.maven.org/maven2/org/apache/poi/poi/3.17/poi-3.17.jar");
+                        } else {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             } else if (ParserType.JXL.equals(parserType)) {
-                excelParser = new JxlExcelParser();
+                try {
+                    excelParser = new JxlExcelParser();
+                } catch (NoClassDefFoundError e) {
+                    if ("jxl/read/biff/BiffException".equals(e.getMessage().trim())) {
+                        throw new RuntimeException(
+                                "没有引入jxl-x.x.x.jar,你可以从下面的地址下载:http://central.maven.org/maven2/net/sourceforge/jexcelapi/jxl/2.6.12/jxl-2.6.12.jar");
+                    } else {
+                        e.printStackTrace();
+                    }
+                }
             } else if (ParserType.POI.equals(parserType)) {
-                excelParser = new PoiExcelParser();
+                try {
+                    excelParser = new PoiExcelParser();
+                } catch (NoClassDefFoundError e) {
+                    if ("org/apache/poi/ss/usermodel/Cell".equals(e.getMessage().trim())) {
+                        throw new RuntimeException(
+                                "没有引入poi-x.x.x.jar,你可以从下面的地址下载:http://central.maven.org/maven2/org/apache/poi/poi/3.17/poi-3.17.jar");
+                    } else {
+                        e.printStackTrace();
+                    }
+                }
             } else {
                 throw new RuntimeException("不存在的Excel实现:" + parserType);
             }
