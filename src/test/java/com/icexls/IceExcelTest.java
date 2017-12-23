@@ -8,7 +8,7 @@ import com.icexls.NumberType;
 import com.icexls.ParserType;
 
 public class IceExcelTest {
-    @Test
+    //@Test
     public void export() {
         String[][] data = { { "aaa", "167" }, { "278", "bbb2" }, { "aaa3", "120.36" }, { "aaa4", "bbb4" } };
         IceExcel iceExcel = new IceExcel("D:/xls-test.xls");
@@ -30,5 +30,9 @@ public class IceExcelTest {
             }
             System.out.println();
         }
+    }
+    @Test
+    public void test(){
+    	
     }
 }
