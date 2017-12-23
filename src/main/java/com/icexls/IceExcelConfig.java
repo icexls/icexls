@@ -20,7 +20,7 @@ public class IceExcelConfig {
     * 修改Excel导出对象的操作API类型
     * @param iceExcel Excel操作对象
     * @param parserType 需要使用的新的API类型名称
-    * @see com.ice.excel.ParserType
+    * @see com.icexls.ParserType
     * @since 1.0
     */
    public static void setParserType(IceExcel iceExcel, ParserType parserType) {
@@ -29,8 +29,8 @@ public class IceExcelConfig {
    /**
     * 修改Excel导出对象的数字格式
     * @param iceExcel Excel操作对象
-    * @param parserType 需要使用的新的数字格式类型名称
-    * @see com.ice.excel.NumberType
+    * @param numberType 需要使用的新的数字格式类型名称
+    * @see com.icexls.NumberType
     * @since 1.0
     */
    public static void setNumberType(IceExcel iceExcel, NumberType numberType) {
