@@ -3,7 +3,6 @@ package com.icexls;
  * 对Excel操作对象的一些默认参数的修改
  * 
  * @author iceWater
- * @date 2017-04-08
  * @version 1.0
  */
 public class IceExcelConfig {

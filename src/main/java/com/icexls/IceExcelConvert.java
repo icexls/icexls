@@ -2,10 +2,9 @@ package com.icexls;
 
 import java.util.List;
 /**
- * List<String[]>与String[][]的转换
+ * List&lt;String[]&gt;与String[][]的转换
  * 
  * @author iceWater
- * @date 2017-12-15
  * @version 2.0
  */
 public class IceExcelConvert {

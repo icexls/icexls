@@ -4,7 +4,6 @@ package com.icexls;
  * 导出Excel的工具类
  * 
  * @author iceWater
- * @date 2017-04-08
  * @version 1.0
  */
 public class IceExcel {

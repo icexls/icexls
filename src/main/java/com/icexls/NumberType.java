@@ -5,7 +5,6 @@ package com.icexls;
  * NUMBER  - 使用数字类型
  * 
  * @author iceWater
- * @date 2017-04-08
  * @version 1.0
  */
 public enum NumberType {
