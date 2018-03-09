@@ -23,11 +23,11 @@ public class JxlExcelParser extends AbstractExcelParser implements ExcelParser {
         try {
             workbook = Workbook.getWorkbook(file);
         } catch (BiffException e) {
-        	if("Unable to recognize OLE stream".equals(e.getMessage())){
-        		throw new RuntimeException("jxl暂不支持Excel 2007,请使用POI实现");
-        	}else{
-        		e.printStackTrace();
-        	}
+            if ("Unable to recognize OLE stream".equals(e.getMessage())) {
+                throw new RuntimeException("jxl暂不支持Excel 2007,请使用POI实现");
+            } else {
+                e.printStackTrace();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -61,7 +61,7 @@ public class JxlExcelParser extends AbstractExcelParser implements ExcelParser {
         return result;
     }
 
-    // @Override
+    @Override
     public void setData(String[][] data) {
         String xlsFileName = this.getExcelFileName();
         File file = new File(xlsFileName);
@@ -71,7 +71,7 @@ public class JxlExcelParser extends AbstractExcelParser implements ExcelParser {
         try {
             File xlsFile = new File(xlsFileName);
             File parentFile = xlsFile.getParentFile();
-            if(!parentFile.exists()){
+            if (!parentFile.exists()) {
                 parentFile.mkdirs();
             }
             try {

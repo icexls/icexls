@@ -16,8 +16,7 @@ public class IceExcel {
     /**
      * 创建一个Excel操作对象
      * 
-     * @param excelFileName
-     *            操作的Excel对应的文件路径
+     * @param excelFileName 操作的Excel对应的文件路径
      * @since 1.0
      */
     public IceExcel(String excelFileName) {
@@ -27,10 +26,8 @@ public class IceExcel {
     /**
      * 创建一个Excel操作对象
      * 
-     * @param excelFileName
-     *            操作的Excel对应的文件路径
-     * @param sheetName
-     *            Excel对应的Sheet名称
+     * @param excelFileName 操作的Excel对应的文件路径
+     * @param sheetName Excel对应的Sheet名称
      * @since 1.0
      */
     public IceExcel(String excelFileName, String sheetName) {
@@ -60,31 +57,39 @@ public class IceExcel {
     /**
      * 将String二维数组导出Excel
      * 
-     * @param data
-     *            需要导出Excel的数据
+     * @param data 需要导出Excel的数据
      * @since 1.0
      */
     public void setData(String[][] data) {
-        init("第一页");
+        String sheetName = "第一页";
+        if (excelFileName != null) {
+            int lastIndexOf = excelFileName.lastIndexOf("/");
+            if (lastIndexOf != -1) {
+                String fileName = excelFileName.substring(lastIndexOf + 1);
+                if (fileName.endsWith(".xlsx") || fileName.endsWith(".XLSX")) {
+                    fileName = fileName.substring(0, fileName.length() - 5);
+                } else if (fileName.endsWith(".xls") || fileName.endsWith(".XLS")) {
+                    fileName = fileName.substring(0, fileName.length() - 4);
+                }
+                if (fileName != null && !"".equals(fileName.trim())) {
+                    sheetName = fileName;
+                }
+            }
+        }
+        init(sheetName);
         excelParser.setData(data);
     }
 
     private void init(String sheetName) {
         if (excelParser == null) {
             if (ParserType.AUTO.equals(parserType)) {
-                if (ExcelClassUtil.hasClass("jxl.Cell")) {
+                if (ExcelClassUtil.hasClass("org.apache.poi.hssf.usermodel.HSSFCell")) {
+                    excelParser = new PoiExcelParser();
+                } else if (ExcelClassUtil.hasClass("jxl.Cell")) {
                     excelParser = new JxlExcelParser();
                 } else {
-                    try {
-                        excelParser = new PoiExcelParser();
-                    } catch (NoClassDefFoundError e) {
-                        if ("org/apache/poi/ss/usermodel/Cell".equals(e.getMessage().trim())) {
-                            throw new RuntimeException(
-                                    "没有引入poi-x.x.x.jar,你可以从下面的地址下载:http://central.maven.org/maven2/org/apache/poi/poi/3.17/poi-3.17.jar");
-                        } else {
-                            e.printStackTrace();
-                        }
-                    }
+                    throw new RuntimeException(
+                            "没有引入poi-x.x.x.jar,你可以从下面的地址下载:http://central.maven.org/maven2/org/apache/poi/poi/3.17/poi-3.17.jar");
                 }
             } else if (ParserType.JXL.equals(parserType)) {
                 try {
